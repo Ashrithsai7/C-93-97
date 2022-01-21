@@ -34,6 +34,36 @@ getData();
 function LOGOUT(){
     localStorage.removeItem("User_name")
     localStorage.removeItem("RNAME")
-    window.location="CITW_loginpage.html"
+    window.location="index_loginpage.html"
+}
+
+
+
+  USERNAME=localStorage.getItem("User_name")
+  ROOMNAME=localStorage.getItem("RNAME")
+
+  function SEND(){
+    message=document.getElementById("msg").value;
+        firebase.database().ref(ROOMNAME ).push({
+              NAME:USERNAME,
+              MESSAGE:message,
+              LIKE:0
+        })
+        document.getElementById("msg").value=""
+    }
+
+function getData() { firebase.database().ref("/"+room_name).on('value', function(snapshot) { document.getElementById("output").innerHTML = ""; snapshot.forEach(function(childSnapshot) { childKey  = childSnapshot.key; childData = childSnapshot.val(); if(childKey != "purpose") {
+       firebase_message_id = childKey;
+       message_data = childData;
+//Start code
+
+//End code
+    } });  }); }
+getData();
+
+function LOGOUT(){
+    localStorage.removeItem("User_name")
+    localStorage.removeItem("RNAME")
+    window.location="index.html"
 }
 
